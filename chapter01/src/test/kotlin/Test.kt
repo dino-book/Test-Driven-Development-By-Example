@@ -20,7 +20,7 @@ class Test {
 
     @Test
     fun testEquality() {
-        assertTrue(Dollar(5).equal(Dollar(5)))
-        assertFalse(Dollar(5).equal(Dollar(6)))
+        assertTrue(Dollar(5).equals(Dollar(5)))
+        assertFalse(Dollar(5).equals(Dollar(6)))
     }
 }
