@@ -1,8 +1,10 @@
 package main
 
-abstract class Money(internal var amount: Int, private val currency: String) {
+open class Money(internal var amount: Int, internal val currency: String) {
 
-    abstract fun times(multiplier: Int): Money
+    open fun times(multiplier: Int): Money {
+        return Money(amount * multiplier, currency)
+    }
 
     fun currency(): String {
         return currency
@@ -10,7 +12,7 @@ abstract class Money(internal var amount: Int, private val currency: String) {
 
     override fun equals(other: Any?): Boolean {
         val money: Money = other as Money
-        return amount == money.amount && javaClass == money.javaClass
+        return amount == money.amount && currency() == money.currency()
     }
 
     companion object {
@@ -21,5 +23,9 @@ abstract class Money(internal var amount: Int, private val currency: String) {
         fun franc(amount: Int): Money {
             return Franc(amount, "CHF")
         }
+    }
+
+    override fun toString(): String {
+        return "$amount $currency"
     }
 }
