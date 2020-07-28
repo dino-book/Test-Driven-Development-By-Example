@@ -21,10 +21,16 @@ class Test {
 
     @Test
     fun testEquality() {
-        assertTrue(Money.dollar(5) == Dollar(5))
-        assertFalse(Money.dollar(5) == Dollar(6))
-        assertTrue(Money.franc(5) == Franc(5))
-        assertFalse(Money.franc(5) == Franc(6))
-        assertFalse(Money.franc(5) == Dollar(6))
+        assertTrue(Money.dollar(5) == Money.dollar(5))
+        assertFalse(Money.dollar(5) == Money.dollar(6))
+        assertTrue(Money.franc(5) == Money.franc(5))
+        assertFalse(Money.franc(5) == Money.franc(6))
+        assertFalse(Money.franc(5) == Money.dollar(6))
+    }
+
+    @Test
+    fun testCurrency() {
+        assertEquals("USD", Money.dollar(1).currency())
+        assertEquals("CHF", Money.franc(1).currency())
     }
 }
