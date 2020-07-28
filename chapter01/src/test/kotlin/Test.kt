@@ -1,5 +1,3 @@
-import main.Dollar
-import main.Franc
 import main.Money
 import org.junit.Test
 import org.junit.Assert.*
@@ -23,14 +21,7 @@ class Test {
     fun testEquality() {
         assertTrue(Money.dollar(5) == Money.dollar(5))
         assertFalse(Money.dollar(5) == Money.dollar(6))
-        assertTrue(Money.franc(5) == Money.franc(5))
-        assertFalse(Money.franc(5) == Money.franc(6))
         assertFalse(Money.franc(5) == Money.dollar(6))
-    }
-
-    @Test
-    fun testDifferentClassEquality() {
-        assertTrue(Money(10, "CHF") == Franc(10, "CHF"))
     }
 
     @Test
