@@ -1,6 +1,6 @@
 package main
 
-open class Money(internal var amount: Int, internal val currency: String) {
+open class Money(private var amount: Int, private val currency: String) {
 
     open fun times(multiplier: Int): Money {
         return Money(amount * multiplier, currency)
@@ -27,5 +27,9 @@ open class Money(internal var amount: Int, internal val currency: String) {
 
     override fun toString(): String {
         return "$amount $currency"
+    }
+
+    fun plus(addend: Money): Money {
+        return Money(amount + addend.amount, currency)
     }
 }
