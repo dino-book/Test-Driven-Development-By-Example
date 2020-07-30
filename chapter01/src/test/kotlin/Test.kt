@@ -1,4 +1,7 @@
+import main.Bank
+import main.Expression
 import main.Money
+import main.Sum
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -32,7 +35,34 @@ class Test {
 
     @Test
     fun testSimpleAddition() {
-        val sum: Money = Money.dollar(5).plus(Money.dollar(5))
-        assertEquals(sum, Money.dollar(10))
+        val five: Money = Money.dollar(5)
+        val sum: Expression = five.plus(five)
+        val bank: Bank = Bank()
+        val reduced: Money = bank.reduce(sum, "USD")
+        assertEquals(reduced, Money.dollar(10))
+    }
+
+    @Test
+    fun testPlusReturnsSum() {
+        val five: Money = Money.dollar(5)
+        val result: Expression = five.plus(five)
+        val sum: Sum = result as Sum
+        assertEquals(five, sum.augend)
+        assertEquals(five ,sum.addend)
+    }
+
+    @Test
+    fun testReduceSum() {
+        val sum: Expression = Sum(Money.dollar(3), Money.dollar(4))
+        val bank: Bank = Bank()
+        val result: Money = bank.reduce(sum, "USD")
+        assertEquals(Money.dollar(7), result)
+    }
+
+    @Test
+    fun testReduceMoney() {
+        val bank: Bank = Bank()
+        val result: Money = bank.reduce(Money.dollar(1), "USD")
+        assertEquals(Money.dollar(1), result)
     }
 }
