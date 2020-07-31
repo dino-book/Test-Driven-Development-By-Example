@@ -32,4 +32,9 @@ open class Money(var amount: Int, private val currency: String) : Expression {
     fun plus(addend: Money): Expression {
         return Sum(this, addend)
     }
+
+    override fun reduce(bank: Bank, to: String): Money {
+        val rate: Int = bank.rate(currency, to)
+        return Money(amount / rate, to)
+    }
 }
