@@ -2,7 +2,7 @@ package main
 
 open class Money(var amount: Int, private val currency: String) : Expression {
 
-    open fun times(multiplier: Int): Money {
+    open fun times(multiplier: Int): Expression {
         return Money(amount * multiplier, currency)
     }
 
@@ -29,7 +29,7 @@ open class Money(var amount: Int, private val currency: String) : Expression {
         return "$amount $currency"
     }
 
-    fun plus(addend: Money): Expression {
+    override fun plus(addend: Expression): Expression {
         return Sum(this, addend)
     }
 
